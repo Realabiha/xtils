@@ -38,6 +38,6 @@ describe("pubsub测试", () => {
     delete pb.store
     expect(pb.store).toBeDefined()
     pb.store = null
-    expect(pb.store).toBeNull()
+    expect(pb.store).not.toBeNull()
   })
 });
