@@ -31,6 +31,19 @@ jobs:
     - name: Run Scripts # 执行脚本命令
       run:  npm run test
 
+  deploy:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    strategy:
+    matrix:
+      node-version: [16.x]
+    
+    setps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        
     - name: Fake Deploy
-      needs: Run Scripts
       run: echo hello world
