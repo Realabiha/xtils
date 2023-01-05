@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 16.x] # node版本
+        node-version: [16.x] # node版本
 # 任务步骤
     steps:
     - uses: actions/checkout@v3 # 拉取代码
