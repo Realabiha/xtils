@@ -1,28 +1,32 @@
+# workflows名称
 name: NodeJS with Webpack
 
+# workflows 触发时机
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
+# workflows 任务
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # 运行环境
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x, 18.x]
-
+        node-version: [12.x, 16.x] # node版本
+# 任务步骤
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3 # 拉取代码
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }} # 安装node
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Test
-      run: |
-        npm install
-        npm run test
+    - name: Install Deps # 安装npm依赖包
+      run: npm install
+
+    - name: Run Scripts # 执行脚本命令
+      run:  npm run test
