@@ -37,13 +37,13 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-    matrix:
-      node-version: [16.x]
+      matrix:
+        node-version: [16.x]
     
-    setps:
+    steps:
     - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        
+
     - name: Fake Deploy
       run: echo hello world
