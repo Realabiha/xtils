@@ -30,3 +30,7 @@ jobs:
 
     - name: Run Scripts # 执行脚本命令
       run:  npm run test
+
+    - name: Fake Deploy
+      needs: Run Scripts
+      run: echo hello world
