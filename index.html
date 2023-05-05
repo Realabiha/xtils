@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #app {
+    width: 100px;
+    height: 100px;
+    background: red;
+  }
+
+  #test {
+    width: 100px;
+    height: 100px;
+    background: saddlebrown;
+  }
+</style>
+
+<body>
+  <div id="app"></div>
+  <div id="test"></div>
+  <!-- <script src="./utils/createDom.js"></script> -->
+  <!-- <script src="./utils/spliceUpdate.js"></script> -->
+  <!-- <script src="./utils/deepClone.js"></script> -->
+  <!-- <script src="./utils/scheduler.js"></script> -->
+  <!-- <script src="./utils/lazyMan.js"></script> -->
+  <script>
+    // const lm = new lazyMan('abiha').eat('a').sleep(1).sleepFirst(5).eat('b')
+    // console.log(lm)
+    let g
+    const call = function (promise) {
+      promise().then(res => { console.log(g.next(res)) })
+    }
+    const gen = function* (call) {
+      const res = yield call(function () {
+        return new Promise((resolve, reject) => { resolve(123) })
+      })
+      console.log(res, 'res')
+    }
+    g = gen(call)
+    console.log(g.next())
+
+    const app = document.querySelector('#app')
+    const test = document.querySelector('#test')
+
+    const onAppClick = function () {
+      const changeHeight = () => {
+        app.style.height = '400px';
+      }
+      setTimeout(changeHeight)
+      Promise.resolve(123).then(changeHeight)
+    }
+    app.addEventListener('click', onAppClick)
+  </script>
+</body>
+
+</html>

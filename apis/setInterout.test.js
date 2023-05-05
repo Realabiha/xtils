@@ -1,0 +1,18 @@
+const setInterout = require('./setInterout')
+describe('setInterout测试', () => {
+  jest.useFakeTimers()
+  jest.spyOn(global, 'setTimeout')
+  test('回调执行', () => {
+    const fn = jest.fn()
+    const cancel = setInterout(fn, 1000)
+    expect(setTimeout).toHaveBeenCalledTimes(1)
+    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 1000)
+    jest.runOnlyPendingTimers()
+    expect(setTimeout).toHaveBeenCalledTimes(2)
+    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 1000)
+    cancel()
+    jest.runOnlyPendingTimers()
+    expect(setTimeout).toHaveBeenCalledTimes(2)
+    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 1000)
+  })
+})
